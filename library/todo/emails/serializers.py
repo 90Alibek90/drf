@@ -6,6 +6,12 @@ from django.contrib.auth.models import PermissionsMixin, UserManager
 from django.contrib.auth.validators import UnicodeUsernameValidator, ASCIIUsernameValidator
 from django.core.mail import send_mail
 from todo.emails import models
+from .models import Article
+
+class ArticleSerializer(ModelSerializer):
+    class Meta:
+        model = Article
+        fields = '__all__'
 
 
 class AbstractUser(AbstractBaseUser, PermissionsMixin):

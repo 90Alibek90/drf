@@ -16,14 +16,34 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
+from emails import views
+
 
 from emails.views import EmailModelViewSet
+from rest_framework.generics import DestroyAPIView
+from rest_framework.genericsimportUpdateAPIView
 
 router = DefaultRouter()
-router.register('authors', EmailModelViewSet)
+router.register('base', views.ArticleViewSet, basename='article')
+filter_router = DefaultRouter()
+filter_router.register('param', views.ArticleParamFilterViewSet)
 
+class ArticleUpdateAPIView(UpdateAPIView):
+    renderer_classes = [JSONRenderer]
+    queryset = Article.objects.all()
+    serializer_class = ArticleSerializer
+
+class ArticleDestroyAPIView(DestroyAPIView):
+    renderer_classes = [JSONRenderer]
+    queryset = Article.objects.all()
+    serializer_class = ArticleSerializer
 
 urlpatterns = [
+    path('filters/', include(filter_router.urls)),
+    path('filters/kwargs/<str:name>/', views.ArticleKwargsFilterView.as_view()),
+    path('viewsets/', include(router.urls)),
+    path('generic/retrieve/<int:pk>/', views.ArticleRetrieveAPIView.as_view()),
+    path('views/api-view/', views.ArticleAPIVIew.as_view()),
     path('admin/', admin.site.urls),
     path('api-auth/', include('rest_framework.urls')),
     path('', include(router.urls))
