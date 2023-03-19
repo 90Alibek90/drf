@@ -18,7 +18,14 @@ from django.urls import path, include
 from rest_framework.routers import DefaultRouter
 
 from emails.views import EmailModelViewSet
+from rest_framework import routers
+from rest_framework.authtoken import views
+from emails.views import AuthorViewSet, BookViewSet
+from rest_framework.authtoken import views
 
+router = routers.DefaultRouter()
+router.register('authors', AuthorViewSet)
+router.register('books', BookViewSet)
 router = DefaultRouter()
 router.register('authors', EmailModelViewSet)
 
@@ -26,6 +33,7 @@ router.register('authors', EmailModelViewSet)
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api-auth/', include('rest_framework.urls')),
-    path('', include(router.urls))
+    path('', include(router.urls)),
+    path('api-token-auth/', views.obtain_auth_token),
 ]
 
