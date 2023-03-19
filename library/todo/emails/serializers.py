@@ -7,6 +7,19 @@ from django.contrib.auth.validators import UnicodeUsernameValidator, ASCIIUserna
 from django.core.mail import send_mail
 from todo.emails import models
 
+from rest_framework import serializers
+from .models import Author, Book
+
+class AuthorSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Author
+        fields ='__all__'
+
+class BookSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Book
+        fields ='__all__'
+
 
 class AbstractUser(AbstractBaseUser, PermissionsMixin):
     """
