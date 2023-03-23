@@ -7,6 +7,7 @@ from django.contrib.auth.validators import UnicodeUsernameValidator, ASCIIUserna
 from django.core.mail import send_mail
 from todo.emails import models
 
+
 from rest_framework import serializers
 from .models import Author, Book
 
