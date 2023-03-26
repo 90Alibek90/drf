@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'drf_yasg',
     'rest_framework',
     'emails',
     'rest_framework.authtoken',
@@ -110,6 +111,14 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 REST_FRAMEWORK = {
+    #'DEFAULT_VERSIONING_CLASS':
+    #   'rest_framework.versioning.URLPathVersioning',
+    #'DEFAULT_VERSIONING_CLASS':
+    #   'rest_framework.versioning.NamespaceVersioning',
+    #'DEFAULT_VERSIONING_CLASS':
+    #   'rest_framework.versioning.QueryParameterVersioning',
+    'DEFAULT_VERSIONING_CLASS':
+        'rest_framework.versioning.AcceptHeaderVersioning,
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.IsAuthenticated',
         'rest_framework.authentication.BasicAuthentication',
