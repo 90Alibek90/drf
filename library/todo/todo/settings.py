@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'graphene_django',
     'drf_yasg',
     'rest_framework',
     'emails',
@@ -125,6 +126,10 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.SessionAuthentication',
         'rest_framework.authentication.TokenAuthentication',
     ]
+}
+
+GRAPHENE = {
+    "SCHEMA":"library.schema.schema"
 }
 
 # Internationalization
